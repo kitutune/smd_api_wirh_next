@@ -1,0 +1,17 @@
+{
+    "name": "remote-next",
+    "dockerComposeFile": "../../../docker/docker-compose.yml",
+    "service": "nextjs",
+    "shutdownAction": "none",
+    "workspaceFolder": "/app",
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+    },
+    "extensions": [
+		"PulkitGangwar.nextjs-snippets",
+		"BracketPairColorDLW.bracket-pair-color-dlw",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"dsznajder.es7-react-js-snippets"
+	]
+}
