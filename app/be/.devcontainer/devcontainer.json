@@ -13,6 +13,7 @@
 		"vscjava.vscode-lombok",
 		"vscode-icons-team.vscode-icons",
 		"esbenp.prettier-vscode",
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"vscjava.vscode-gradle"
 	]
 }
