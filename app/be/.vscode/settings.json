@@ -1,3 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+  // 自動フォーマット設定
+  "editor.formatOnSave": true, // 保存時にフォーマット
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
