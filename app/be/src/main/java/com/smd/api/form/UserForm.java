@@ -1,3 +1,4 @@
+package com.smd.api.form;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
