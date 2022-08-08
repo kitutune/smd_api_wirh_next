@@ -14,5 +14,5 @@ public interface UserService {
 
     boolean deleteUser(Integer id);
 
-    UserForm updateUser(Long id,UserForm uForm)
+    UserForm updateUser(Integer id, UserForm uForm);
 }

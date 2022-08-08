@@ -9,18 +9,22 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserForm {
+
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @NotNull
     private String name;
     @Min(0)
@@ -30,5 +34,9 @@ public class UserForm {
     private String password;
     @Email
     private String mailaddress;
+
+    // public UserForm(){
+
+    // }
 
 }
