@@ -1,7 +1,6 @@
 package com.smd.api.service;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -28,35 +27,46 @@ public class UserServiceImpl implements UserService {
         return uForm;
     }
 
-    // @Override
-    // public List<UserForm> getAllUsers() {
-    // // getAllUsersの機能を実装
-    // // まずEntityにDBから取得して代入
-    // List<UserEntity> uEntities = uRepository.findAll();
-    // List<UserFrom> uFroms = uEntities.stream().map(uEntities -> new UserForm(
-    // uEntities.getId(), uEntities.getName(), uEntities.getAge(),
-    // uEntities.getMailaddress()
-
-    // )).collect(Collectors.tolist());
-    // return uFroms;
-    // }
+    @Override
+    public List<UserForm> getAllUsers() {
+        // getAllUsersの機能を実装
+        // まずEntityにDBから取得して代入
+        List<UserEntity> uEntities = uRepository.findAll();
+        List<UserForm> uForms = uEntities.stream().map(
+                uEntitiy -> new UserForm(
+                        uEntitiy.getId(), uEntitiy.getName(), uEntitiy.getAge(), uEntitiy.getPassword(),
+                        uEntitiy.getMailaddress()))
+                .collect(Collectors.toList());
+        return uForms;
+    }
 
     @Override
     public UserForm getUserById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        // getUserByIdの機能を実装
+        UserEntity uEntity = uRepository.findById(id).get();
+        UserForm uForm = new UserForm();
+        BeanUtils.copyProperties(uEntity, uForm);
+
+        return uForm;
     }
 
     @Override
     public boolean deleteUser(Integer id) {
-        // TODO Auto-generated method stub
-        return false;
+        // deleteUserの機能を実装
+        UserEntity uEntity = uRepository.findById(id).get();
+        uRepository.delete(uEntity);
+        return true;
     }
 
     @Override
-    public UserForm updateUser(Long id, UserForm uForm) {
-        // TODO Auto-generated method stub
-        return null;
+    public UserForm updateUser(Integer id, UserForm uForm) {
+        // updateUserの機能を実装
+        UserEntity uEntity = uRepository.findById(id).get();
+        uEntity.setName(uForm.getName());
+        uEntity.setAge(uForm.getAge());
+        uEntity.setMailaddress(uForm.getMailaddress());
+        // password外すべきか？
+        return uForm;
     }
 
 }
