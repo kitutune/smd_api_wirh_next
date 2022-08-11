@@ -1,14 +1,14 @@
 CREATE DATABASE
-    IF NOT EXISTS user_schema CHARACTER SET utf8 COLLATE utf8_general_ci;
+    IF NOT EXISTS sample_schema CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-USE user_schema;
+USE sample_schema;
 
 CREATE TABLE
-    IF NOT EXISTS user_schema.users(
+    IF NOT EXISTS sample_schema.users(
         id int PRIMARY KEY AUTO_INCREMENT,
         name varchar(50) NOT NULL,
         age VARCHAR(3),
         mailaddress varchar(30) NOT NULL,
-        password varchar(10) NOT NULL,
+        todo varchar(250),
         INDEX(id)
     );

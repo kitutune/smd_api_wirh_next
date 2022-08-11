@@ -22,7 +22,7 @@ public class UserEntity {
     @NotNull
     private String name;
     private int age;
-    private String password;
+    private String todo;
     private String mailaddress;
 
 }

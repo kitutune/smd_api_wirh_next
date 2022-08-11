@@ -31,12 +31,8 @@ public class UserForm {
     @Max(150)
     private int age;
     @Size(min = 3, max = 10)
-    private String password;
+    private String todo;
     @Email
     private String mailaddress;
-
-    // public UserForm(){
-
-    // }
 
 }

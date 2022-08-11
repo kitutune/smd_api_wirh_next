@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         List<UserEntity> uEntities = uRepository.findAll();
         List<UserForm> uForms = uEntities.stream().map(
                 uEntitiy -> new UserForm(
-                        uEntitiy.getId(), uEntitiy.getName(), uEntitiy.getAge(), uEntitiy.getPassword(),
+                        uEntitiy.getId(), uEntitiy.getName(), uEntitiy.getAge(), uEntitiy.getTodo(),
                         uEntitiy.getMailaddress()))
                 .collect(Collectors.toList());
         return uForms;
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         uEntity.setName(uForm.getName());
         uEntity.setAge(uForm.getAge());
         uEntity.setMailaddress(uForm.getMailaddress());
-        // password外すべきか？
+        uEntity.setTodo(uForm.getTodo());
         return uForm;
     }
 
