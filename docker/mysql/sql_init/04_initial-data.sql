@@ -1,23 +1,23 @@
 INSERT INTO
     sample_schema.users (name, age, mailaddress, todo)
 VALUES (
-        'なおふみ',
+        'naohumi',
         '18',
         'naohumi@mail.com',
-        '適当な文１'
+        'tekitoutekitou'
     ), (
-        'かける',
+        'kakeru',
         '20',
         'nkakerui@mail.com',
-        '適当な文2'
+        'waruwaru'
     ), (
-        'こたろう',
+        'kotaro',
         '25',
         'nkotaro@mail.com',
-        '適当な文3'
+        'kerukeru'
     ), (
-        'ふみか',
+        'humika',
         '35',
         'humika@mail.com',
-        '適当な文4'
+        'korokoro'
     );
