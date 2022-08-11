@@ -20,7 +20,7 @@ import com.smd.api.service.UserService;
 import lombok.AllArgsConstructor;
 // import lombok.NoArgsConstructor;
 
-@CrossOrigin(value = "http://localhost:3001/")
+@CrossOrigin(value = "http://localhost:3000/")
 @RestController
 // @RequestMapping
 // @NoArgsConstructor
@@ -35,8 +35,10 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserForm> getAllUsers() {
-        return userService.getAllUsers();
+    // public List<UserForm> getAllUsers() {
+    public String getAllUsers() {
+        // return userService.getAllUsers();
+        return "hello world";
     }
 
     @GetMapping("/users/{id}")
