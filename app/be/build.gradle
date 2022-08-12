@@ -2,19 +2,6 @@ plugins {
 	id 'org.springframework.boot' version '3.0.0-M3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	// 下記入れるとビルド失敗
-// 	 // Spotless
-//   // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
-//   id "com.diffplug.spotless" version "6.7.2"
-// }
-
-// apply plugin: "com.diffplug.spotless"
-
-// // Google Java Style を Spotless に適用する
-// spotless {
-//     java {
-//         googleJavaFormat()
-//     }
 }
 
 group = 'com.smd'
@@ -25,11 +12,6 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	// 下記いれるとビルド失敗
-// 	developmentOnly
-// runtimeClasspath {
-//         extendsFrom developmentOnly
-// }
 }
 
 repositories {
