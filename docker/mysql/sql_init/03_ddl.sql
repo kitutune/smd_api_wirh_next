@@ -4,7 +4,7 @@ CREATE DATABASE
 USE sample_schema;
 
 CREATE TABLE
-    IF NOT EXISTS sample_schema.users(
+    IF NOT EXISTS sample_schema.user(
         id int PRIMARY KEY AUTO_INCREMENT,
         name varchar(50) NOT NULL,
         age VARCHAR(3),

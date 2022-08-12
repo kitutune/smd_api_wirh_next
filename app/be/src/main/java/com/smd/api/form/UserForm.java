@@ -20,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserForm {
-
+    // Entityで自動的に番号振り分けられる場合必要ない？逆？
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

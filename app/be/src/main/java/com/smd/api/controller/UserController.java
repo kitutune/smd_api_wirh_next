@@ -42,14 +42,14 @@ public class UserController {
         // return "hello world";
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<UserForm> getUserById(@PathVariable("id") Integer id) {
         UserForm user = null;
         user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/user/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable("id") Integer id) {
         boolean deleted = false;
         deleted = userService.deleteUser(id);
@@ -58,7 +58,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/user/{id}")
     public ResponseEntity<UserForm> updateUser(@PathVariable("id") Integer id,
             @RequestBody UserForm user) {
         user = userService.updateUser(id, user);

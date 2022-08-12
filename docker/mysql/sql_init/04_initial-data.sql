@@ -1,5 +1,5 @@
 INSERT INTO
-    sample_schema.users (name, age, mailaddress, todo)
+    sample_schema.user (name, age, mailaddress, todo)
 VALUES (
         'naohumi',
         '18',
