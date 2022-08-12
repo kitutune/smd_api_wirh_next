@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smd.api.entity.UserEntity;
 import com.smd.api.form.UserForm;
 import com.smd.api.service.UserService;
 
@@ -35,10 +36,10 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    // public List<UserForm> getAllUsers() {
-    public String getAllUsers() {
-        // return userService.getAllUsers();
-        return "hello world";
+    public List<UserEntity> getAllUsers() {
+        // public String getAllUsers() {
+        return userService.getAllUsers();
+        // return "hello world";
     }
 
     @GetMapping("/users/{id}")

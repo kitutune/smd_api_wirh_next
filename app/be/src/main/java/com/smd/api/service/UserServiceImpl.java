@@ -28,16 +28,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserForm> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         // getAllUsersの機能を実装
         // まずEntityにDBから取得して代入
-        List<UserEntity> uEntities = uRepository.findAll();
-        List<UserForm> uForms = uEntities.stream().map(
-                uEntitiy -> new UserForm(
-                        uEntitiy.getId(), uEntitiy.getName(), uEntitiy.getAge(), uEntitiy.getTodo(),
-                        uEntitiy.getMailaddress()))
-                .collect(Collectors.toList());
-        return uForms;
+        // List<UserEntity> uEntities = uRepository.findAll();
+        // List<UserForm> uForms = uEntities.stream().map(
+        // uEntitiy -> new UserForm(
+        // uEntitiy.getId(), uEntitiy.getName(), uEntitiy.getAge(), uEntitiy.getTodo(),
+        // uEntitiy.getMailaddress()))
+        // .collect(Collectors.toList());
+        // return uForms;
+        // System.out.println(uEntities);
+        return uRepository.findAll();
     }
 
     @Override

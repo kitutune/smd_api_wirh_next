@@ -1,6 +1,7 @@
 package com.smd.api.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -16,13 +17,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "users")
 public class UserEntity {
-    @NotNull
+    // @NotNull
     @Id
+    @GeneratedValue
     private Integer id;
     @NotNull
     private String name;
     private int age;
-    private String todo;
     private String mailaddress;
+    private String todo;
 
 }
