@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private UserRepository uRepository;
+    private final UserRepository uRepository;
 
     @Override
     public UserForm saveUser(UserForm uForm) {

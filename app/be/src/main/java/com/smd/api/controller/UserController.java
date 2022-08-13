@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,43 +17,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.smd.api.entity.UserEntity;
 import com.smd.api.form.UserForm;
-import com.smd.api.service.UserService;
+import com.smd.api.service.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
 // import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(value = "http://localhost:3000/")
+@CrossOrigin(value = "http://localhost:3000")
 @RestController
 // @RequestMapping
 // @NoArgsConstructor
-@AllArgsConstructor
+// @AllArgsConstructor
+@RequiredArgsConstructor
 public class UserController {
-
-    private final UserService userService;
+    @Autowired
+    private final UserServiceImpl userServiceImpl;
 
     @PostMapping("/users")
     public UserForm saveUser(@RequestBody UserForm user) {
-        return userService.saveUser(user);
+        return userServiceImpl.saveUser(user);
     }
 
     @GetMapping("/users")
     public List<UserEntity> getAllUsers() {
         // public String getAllUsers() {
-        return userService.getAllUsers();
+        return userServiceImpl.getAllUsers();
         // return "hello world";
     }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserForm> getUserById(@PathVariable("id") Integer id) {
         UserForm user = null;
-        user = userService.getUserById(id);
+        user = userServiceImpl.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable("id") Integer id) {
         boolean deleted = false;
-        deleted = userService.deleteUser(id);
+        deleted = userServiceImpl.deleteUser(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
@@ -61,7 +64,7 @@ public class UserController {
     @PutMapping("/user/{id}")
     public ResponseEntity<UserForm> updateUser(@PathVariable("id") Integer id,
             @RequestBody UserForm user) {
-        user = userService.updateUser(id, user);
+        user = userServiceImpl.updateUser(id, user);
         return ResponseEntity.ok(user);
     }
 
