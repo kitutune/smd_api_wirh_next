@@ -1,5 +1,7 @@
 import React from "react";
 
-export const arrow = () => {
+const Arrow = () => {
   return <div>arrow</div>;
 };
+
+export default Arrow;

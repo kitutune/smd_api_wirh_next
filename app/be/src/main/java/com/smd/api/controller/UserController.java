@@ -13,21 +13,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smd.api.entity.UserEntity;
 import com.smd.api.form.UserForm;
 import com.smd.api.service.UserServiceImpl;
 
-import lombok.AllArgsConstructor;
+// import lombok.AllArgsConstructor;
 // import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(value = "http://localhost:3000")
-@RestController
-// @RequestMapping
+@RequestMapping("/api")
 // @NoArgsConstructor
 // @AllArgsConstructor
+// @CrossOrigin(value = "http://localhost:3000")
+// @CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
+@RestController
 @RequiredArgsConstructor
 public class UserController {
     @Autowired
@@ -35,7 +38,14 @@ public class UserController {
 
     @PostMapping("/users")
     public UserForm saveUser(@RequestBody UserForm user) {
+        System.out.println("入力あり");
+        System.out.println(user);
         return userServiceImpl.saveUser(user);
+    }
+
+    @GetMapping("/test")
+    public String getTest() {
+        return "test";
     }
 
     @GetMapping("/users")

@@ -1,35 +1,58 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useCallback, useEffect, useState } from "react";
+import { useGetUserList } from "./Get/GetUserList";
+import { UsersList } from "./UserList";
 
 export const ShowUserList = () => {
-  const BASEURL = "localhost:8080/users";
-  const [userList, setUserList] = useState();
-  const getUserList = async () => {
-    // 一旦フェッチで試す
-    const response = await fetch(BASEURL, {
-      method: "GET",
-    });
-    if (response.ok) {
-      return response.json();
-    } else {
-      console.log("ResponseError");
-      console.log("ステータス", response.status);
-      console.log("ステータステキスト", response.statusText);
+  const userList = useGetUserList();
+  // const BASEURL = "http://localhost:8080/api/users";
+  // // const BASEURL = "localhost:8080/api/test";
+  // const [userList, setUserList] = useState([
+  //   {
+  //     id: "",
+  //     name: "",
+  //     age: "",
+  //     mailaddress: "",
+  //     todo: "",
+  //   },
+  // ]);
+  // // userテーブルから取得
+  // const getUserList = useCallback(async () => {
+  //   const response = await axios.get(BASEURL).catch((error) => {
+  //     // レスポンスありのエラーハンドリング（実際には必要に応じた例外処理を実装する）
+  //     console.log(
+  //       `Error! code: ${error.response.status}, message: ${error.message}`
+  //     );
+  //     // return error.response;
+  //   });
+  //   // return response.data;
+  //   setUserList(response.data);
+  // }, []);
 
-      return {};
-    }
-    // console.log(response);
-  };
+  // // // 実行結果
+  // // getUserList().then((userlist) => {
+  // //   setUserList(userlist);
+
+  // //   console.log(userlist.length);
+  // // });
+  // console.log("レンダリング");
+  // console.log(userList);
+  // console.log(userList.length);
+  // console.log(userList[0].id);
+  // console.log(userList[0].id === "");
+
+  // if (!(userList[0].id === "")) {
+  //   console.log("変換", Object.entries(userList));
+  // }
 
   // useEffect(() => {
-  //   if (!getUserList) return;
-  //   setUserList(getUserList());
+  //   getUserList();
   // }, []);
-  console.log(userList);
-
   return (
     <>
-      <button onClick={getUserList()}>ゆーざーりすと</button>
+      {/* <button onClick={getUserList()}>ゆーざーりすと</button> */}
       <div>ShowUserList</div>
+      {!(userList[0].id === "") ? <UsersList data={userList} /> : null}
     </>
   );
 };
