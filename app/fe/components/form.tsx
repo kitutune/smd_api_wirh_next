@@ -7,16 +7,19 @@ export const UserForm = () => {
   const [formUser, setFormUser] = useState({
     name: "",
     age: "",
-    password: "",
+    todo: "",
     email: "",
     // termsOfService: false,
   });
-  const BASEURL = "https://localhost:8080/api/users";
+
+  const BASEURL = "http://localhost:8080/api/users";
+
   const form = useForm({
     initialValues: {
       name: "",
       age: "",
-      password: "",
+      // password: "",
+      todo: "",
       email: "",
       // termsOfService: false,
     },
@@ -30,8 +33,8 @@ export const UserForm = () => {
           : /(^\d?\d{1}$)|(^1[0-4]{1}\d{1}$)|(^150$)/.test(age_value)
           ? null
           : "年齢は数字で150以下で入力してください",
-      password: (pass_value) =>
-        pass_value.length < 1 ? "passwordは必須入力です" : null,
+      todo: (todo_value) =>
+        todo_value.length < 1 ? "passwordは必須入力です" : null,
       email: (mail_value) =>
         mail_value.length === 0
           ? null
@@ -41,11 +44,20 @@ export const UserForm = () => {
     },
   });
   const getFormUser = form.onSubmit((values) => {
-    console.log(values);
+    const params = new URLSearchParams();
+    params.append("name", values.name);
+    params.append("age", values.age);
+    params.append("todo", values.todo);
+    params.append("mailaddress", values.email);
+    console.log("params", params);
+    console.log("push");
+
+    console.log("values", values);
     setFormUser(values);
     axios
       .post(BASEURL, values, {
-        headers: { "Content-Type": "application/json" },
+        // .post(BASEURL, params, {
+        // headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
         console.log(response.status);
@@ -92,9 +104,9 @@ export const UserForm = () => {
           <TextInput
             // required
             mt="md"
-            label="password"
+            label="todo"
             placeholder="適当な文字"
-            {...form.getInputProps("password")}
+            {...form.getInputProps("todo")}
           />
           <TextInput
             // required

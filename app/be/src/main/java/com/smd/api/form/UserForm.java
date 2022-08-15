@@ -33,6 +33,6 @@ public class UserForm {
     @Size(min = 3, max = 10)
     private String todo;
     @Email
-    private String mailaddress;
+    private String email;
 
 }

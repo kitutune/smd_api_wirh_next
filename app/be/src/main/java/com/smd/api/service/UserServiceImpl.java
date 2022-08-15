@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         // List<UserForm> uForms = uEntities.stream().map(
         // uEntitiy -> new UserForm(
         // uEntitiy.getId(), uEntitiy.getName(), uEntitiy.getAge(), uEntitiy.getTodo(),
-        // uEntitiy.getMailaddress()))
+        // uEntitiy.getemail()))
         // .collect(Collectors.toList());
         // return uForms;
         // System.out.println(uEntities);
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         UserEntity uEntity = uRepository.findById(id).get();
         uEntity.setName(uForm.getName());
         uEntity.setAge(uForm.getAge());
-        uEntity.setMailaddress(uForm.getMailaddress());
+        uEntity.setEmail(uForm.getEmail());
         uEntity.setTodo(uForm.getTodo());
         return uForm;
     }

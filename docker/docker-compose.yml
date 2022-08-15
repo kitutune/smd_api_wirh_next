@@ -41,6 +41,10 @@ services:
       - 5050:5050
     depends_on:
       - mysql
+    networks:
+      default:
+        aliases:
+          - app.local
   nextjs:
     build: ./nextjs
     tty: true
@@ -50,4 +54,7 @@ services:
     volumes:
       - ../app/fe:/app
     command: sleep infinity
-    
+    networks:
+      default:
+        aliases:
+          - app.local

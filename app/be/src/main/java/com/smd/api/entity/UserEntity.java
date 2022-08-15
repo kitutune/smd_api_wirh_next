@@ -24,7 +24,7 @@ public class UserEntity {
     @NotNull
     private String name;
     private int age;
-    private String mailaddress;
+    private String email;
     private String todo;
 
 }
