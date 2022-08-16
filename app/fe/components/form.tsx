@@ -48,7 +48,7 @@ export const UserForm = () => {
     params.append("name", values.name);
     params.append("age", values.age);
     params.append("todo", values.todo);
-    params.append("mailaddress", values.email);
+    params.append("email", values.email);
     console.log("params", params);
     console.log("push");
 

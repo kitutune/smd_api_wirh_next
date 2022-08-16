@@ -52,7 +52,7 @@ export const UsersList = (props) => {
         </Group>
       </td>
       <td>
-        <Text size="sm">{item.mailaddress}</Text>
+        <Text size="sm">{item.email}</Text>
         <Text size="xs" color="dimmed">
           Email
         </Text>

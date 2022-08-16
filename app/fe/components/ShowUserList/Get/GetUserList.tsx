@@ -9,7 +9,7 @@ export const useGetUserList = () => {
       id: "",
       name: "",
       age: "",
-      mailaddress: "",
+      email: "",
       todo: "",
     },
   ]);

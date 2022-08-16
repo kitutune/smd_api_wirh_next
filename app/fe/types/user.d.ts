@@ -3,6 +3,6 @@ export type User = {
   id: number;
   name: string;
   age: number;
-  mailaddress: string;
+  email: string;
   todo: string;
 };

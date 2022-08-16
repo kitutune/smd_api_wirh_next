@@ -8,7 +8,7 @@ CREATE TABLE
         id int PRIMARY KEY AUTO_INCREMENT,
         name varchar(50) NOT NULL,
         age VARCHAR(3),
-        mailaddress varchar(30) NOT NULL,
+        email varchar(30) NOT NULL,
         todo varchar(250),
         INDEX(id)
     );
