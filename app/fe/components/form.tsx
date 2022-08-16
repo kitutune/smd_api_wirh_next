@@ -44,50 +44,35 @@ export const UserForm = () => {
     },
   });
   const getFormUser = form.onSubmit((values) => {
-    const params = new URLSearchParams();
-    params.append("name", values.name);
-    params.append("age", values.age);
-    params.append("todo", values.todo);
-    params.append("email", values.email);
-    console.log("params", params);
-    console.log("push");
-
     console.log("values", values);
     setFormUser(values);
+  });
+
+  const dbRegistered = useCallback((formUser) => {
     axios
-      .post(BASEURL, values, {
-        // .post(BASEURL, params, {
+      .post(BASEURL, formUser, {
+        // デフォルト値がapplication/jsonなので記述必要なし
         // headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
+        if (response.status === 200) console.log("登録成功");
+
         console.log(response.status);
         console.log(response.data);
       });
-  });
-  // const postUser = useCallback(async (BASEURL, formUser) => {
-  //   const res = await axios.post(BASEURL, formUser).catch((error) => {
-  //     // レスポンスありのエラーハンドリング（実際には必要に応じた例外処理を実装する）
-  //     console.log(
-  //       `Error! code: ${error.response.status}, message: ${error.message}`
-  //     );
-  //     // return err.response
-  //   });
-  //   // if (res.status == 200) {
-  //   //   console.log("OK");
-  //   // }
-  //   console.log(res);
-  //   console.log("登録しました");
-  // }, []);
+  }, []);
 
-  // useEffect(() => {
-  //   if (formUser.name === "") return console.log("空です");
-  //   postUser(BASEURL, formUser);
-  // }, [formUser]);
+  useEffect(() => {
+    if (formUser.name === "" || formUser.email === "") {
+      return console.log("空の値は登録できません");
+    }
+    console.log("登録します");
+    dbRegistered(formUser);
+  }, [formUser]);
 
   return (
     <div className="mt-20">
       <Center>
-        {/* <form onSubmit={form.onSubmit((values) => console.log(values))}> */}
         <form onSubmit={getFormUser}>
           <TextInput
             label="名前"
