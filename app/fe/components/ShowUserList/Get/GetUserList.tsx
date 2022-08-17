@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { UsersList } from "./UserList";
 export const useGetUserList = () => {
+  // java側でGETメソッドを実装しているURL、リクエスト先
   const BASEURL = "http://localhost:8080/api/users";
-  // const BASEURL = "localhost:8080/api/test";
+  // GETでかえってきた（応答があった、レスポンスがあった）DBのデータを補完するuseState
   const [userList, setUserList] = useState([
     {
       id: "",
