@@ -57,19 +57,29 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserForm> getUserById(@PathVariable("id") Integer id) {
+        System.out.println("削除しようとしてる");
         UserForm user = null;
         user = userServiceImpl.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable("id") Integer id) {
+    public ResponseEntity<Map<String, Boolean>> deleteUserById(@PathVariable("id") Integer id) {
         boolean deleted = false;
         deleted = userServiceImpl.deleteUser(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
     }
+    // @DeleteMapping("/user/{id}")
+    // public ResponseEntity<Map<String, Boolean>>
+    // deleteEmployee(@PathVariable("id") Integer id) {
+    // boolean deleted = false;
+    // deleted = userServiceImpl.deleteUser(id);
+    // Map<String, Boolean> response = new HashMap<>();
+    // response.put("deleted", deleted);
+    // return ResponseEntity.ok(response);
+    // }
 
     @PutMapping("/user/{id}")
     public ResponseEntity<UserForm> updateUser(@PathVariable("id") Integer id,

@@ -7,6 +7,7 @@ import {
   Menu,
   ScrollArea,
 } from "@mantine/core";
+import axios from "axios";
 // import { useEffect } from "react";
 // import {
 //   IconPencil,
@@ -27,8 +28,14 @@ import {
 //   }[];
 // }
 
-// export function UsersList({ data }: UsersStackProps) {
 export const UsersList = (props) => {
+  const deleteUser = (e: React.MouseEvent<HTMLElement>) => {
+    const id = e.currentTarget.getAttribute("userId");
+    axios.delete(`http://localhost:8080/api/user/${id}`).then((res) => {
+      // axios.delete(`http://localhost:8080/api/user/${id}`, {data: {userId: 'xxxx'}}).then(res => {
+      console.log(res.data);
+    });
+  };
   // useEffect(() => {
   //   if (!data) return;
   //   console.log(Object.entries(data));
@@ -43,7 +50,7 @@ export const UsersList = (props) => {
           {/* <Avatar size={40} src={item.avatar} radius={40} /> */}
           <div>
             <Text size="sm" weight={500}>
-              {item.name}
+              {item.name} {item.id}
             </Text>
             <Text color="dimmed" size="xs">
               {item.age}
@@ -60,8 +67,16 @@ export const UsersList = (props) => {
       <td>
         <Text size="sm">{item.todo}</Text>
         <Text size="xs" color="dimmed">
-          Rate
+          Todo
         </Text>
+      </td>
+      <td>
+        <button>編集</button>
+      </td>
+      <td>
+        <button onClick={deleteUser} userId={item.id}>
+          削除
+        </button>
       </td>
       <td>
         <Group spacing={0} position="right">

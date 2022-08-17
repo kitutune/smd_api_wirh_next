@@ -2,6 +2,7 @@ import { Button, Center, Checkbox, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { usePostUser } from "./ShowUserList/Post/PostUser";
 
 export const UserForm = () => {
   const [formUser, setFormUser] = useState({
@@ -11,8 +12,9 @@ export const UserForm = () => {
     email: "",
     // termsOfService: false,
   });
+  const dbRegistered = usePostUser(formUser);
 
-  const BASEURL = "http://localhost:8080/api/users";
+  // const BASEURL = "http://localhost:8080/api/users";
 
   const form = useForm({
     initialValues: {
@@ -48,19 +50,19 @@ export const UserForm = () => {
     setFormUser(values);
   });
 
-  const dbRegistered = useCallback((formUser) => {
-    axios
-      .post(BASEURL, formUser, {
-        // デフォルト値がapplication/jsonなので記述必要なし
-        // headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => {
-        if (response.status === 200) console.log("登録成功");
+  // const dbRegistered = useCallback((formUser) => {
+  //   axios
+  //     .post(BASEURL, formUser, {
+  //       // デフォルト値がapplication/jsonなので記述必要なし
+  //       // headers: { "Content-Type": "application/json" },
+  //     })
+  //     .then((response) => {
+  //       if (response.status === 200) console.log("登録成功");
 
-        console.log(response.status);
-        console.log(response.data);
-      });
-  }, []);
+  //       console.log(response.status);
+  //       console.log(response.data);
+  //     });
+  // }, []);
 
   useEffect(() => {
     if (formUser.name === "" || formUser.email === "") {
