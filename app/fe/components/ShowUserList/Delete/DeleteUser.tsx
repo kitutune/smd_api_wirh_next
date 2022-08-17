@@ -1,5 +1,11 @@
-import React from "react";
+import axios from "axios";
 
-export const useDeleteUser = () => {
-  return <div>DeleteUser</div>;
+export const useDeleteUser = (id) => {
+  const deleteUser = (id) => {
+    axios.delete(`http://localhost:8080/api/user/${id}`).then((res) => {
+      console.log("res.data", res.data);
+    });
+  };
+
+  return deleteUser;
 };
