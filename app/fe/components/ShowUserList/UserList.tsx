@@ -8,6 +8,7 @@ import {
   ScrollArea,
 } from "@mantine/core";
 import axios from "axios";
+import { useDeleteUser } from "./Delete/DeleteUser";
 // import { useEffect } from "react";
 // import {
 //   IconPencil,
@@ -29,20 +30,16 @@ import axios from "axios";
 // }
 
 export const UsersList = (props) => {
-  const deleteUser = (e: React.MouseEvent<HTMLElement>) => {
-    const id = e.currentTarget.getAttribute("userId");
-    axios.delete(`http://localhost:8080/api/user/${id}`).then((res) => {
-      // axios.delete(`http://localhost:8080/api/user/${id}`, {data: {userId: 'xxxx'}}).then(res => {
-      console.log(res.data);
-    });
+  // useHookに引数を渡す形にしているが肝心のidはクリックイベントのためonClickの外には存在しない
+  // なので形だけの引数が必要なので何も要素を持たないidを宣言（邪道かも？）
+  let id;
+  // useHook呼び出し、引数にidを渡す
+  const deleteUser = useDeleteUser(id);
+  // useHookであるuseDeleteUserのdeleteUserにidを渡すためだけのonClickメソッド
+  const deleteClick = (e: React.MouseEvent<HTMLElement>) => {
+    const id = e.currentTarget.getAttribute("user_id");
+    deleteUser(id);
   };
-  // useEffect(() => {
-  //   if (!data) return;
-  //   console.log(Object.entries(data));
-  // }, []);
-  // const list = props
-  console.log("child", props);
-  // console.log("child",list.data);
   const rows = props.data.map((item) => (
     <tr key={item.name}>
       <td>
@@ -74,7 +71,7 @@ export const UsersList = (props) => {
         <button>編集</button>
       </td>
       <td>
-        <button onClick={deleteUser} userId={item.id}>
+        <button onClick={deleteClick} user_id={item.id}>
           削除
         </button>
       </td>
