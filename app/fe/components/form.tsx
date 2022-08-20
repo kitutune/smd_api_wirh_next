@@ -86,15 +86,18 @@ export const UserForm = () => {
       dbEdited(formUser);
     } else {
       console.log("新規登録します");
-    dbRegistered(formUser);
+      dbRegistered(formUser);
     }
   }, [formUser]);
-
+  const [value, setValue] = useState("validateを使うとvalueで値を表示できなくなる");
   return (
     <div className="mt-20">
       <Center>
         <form onSubmit={getFormUser}>
           <TextInput
+            value={value}
+            onChange={(event) => setValue(event.currentTarget.value)}
+          />
           <TextInput
             // className="invisible"
             disabled
@@ -102,6 +105,7 @@ export const UserForm = () => {
             placeholder="id"
             {...form.getInputProps("id")}
           />
+          <TextInput
             label="名前"
             placeholder="Name"
             {...form.getInputProps("name")}
@@ -135,6 +139,12 @@ export const UserForm = () => {
           /> */}
 
           <Group className="bg-blue" position="right" mt="md">
+            {/* <Button
+              className="bg-black"
+              onClick={() => form.setFieldValue("name", "testUser2")}
+            >
+              変更2
+            </Button> */}
             <Button className="bg-black" type="submit">
               Submit
             </Button>
