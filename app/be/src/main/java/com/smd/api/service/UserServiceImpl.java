@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
         uEntity.setAge(uForm.getAge());
         uEntity.setEmail(uForm.getEmail());
         uEntity.setTodo(uForm.getTodo());
+        uRepository.save(uEntity);
         System.out.println("サービスでユーザーエンティティを書き換え");
         System.out.println(uEntity.getName());
         return uForm;

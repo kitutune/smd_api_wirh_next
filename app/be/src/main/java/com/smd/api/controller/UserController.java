@@ -83,7 +83,7 @@ public class UserController {
     // return ResponseEntity.ok(response);
     // }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/user/edit/{id}")
     public ResponseEntity<UserForm> updateUser(@PathVariable("id") Integer id,
             @RequestBody UserForm user) {
         System.out.println("IDからユーザーを取得して編集");
