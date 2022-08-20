@@ -1,23 +1,33 @@
 import { Button, Center, Checkbox, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { editUserState } from "atom/PUT/EditUser";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import { usePostUser } from "./ShowUserList/Post/PostUser";
+import { usePutUser } from "./ShowUserList/Put/PutUser";
 
 export const UserForm = () => {
+  const recoilEditUser = useRecoilValue(editUserState);
+  console.log("使う側のRecol", recoilEditUser);
+  // console.log("使う側のRecol", recoilEditUser.name);
+
   const [formUser, setFormUser] = useState({
+    id: "",
     name: "",
     age: "",
     todo: "",
     email: "",
     // termsOfService: false,
   });
+  const dbEdited = usePutUser();
   const dbRegistered = usePostUser(formUser);
 
   // const BASEURL = "http://localhost:8080/api/users";
 
   const form = useForm({
     initialValues: {
+      id: "",
       name: "",
       age: "",
       // password: "",
@@ -64,12 +74,42 @@ export const UserForm = () => {
   //     });
   // }, []);
 
+  const editUserToForm = () => {
+    form.setFieldValue("name", "testUser2");
+    form.setValues({
+      id: recoilEditUser.id,
+      name: recoilEditUser.name,
+      age: recoilEditUser.age,
+      todo: recoilEditUser.todo,
+      email: recoilEditUser.email,
+    });
+  };
+  useEffect(() => {
+    console.log(recoilEditUser);
+    console.log(!recoilEditUser);
+    console.log(!!recoilEditUser);
+    if (!recoilEditUser) {
+      console.log("中身が空");
+
+      return;
+    }
+    editUserToForm();
+    // return () => {
+    //   second
+    // }
+  }, [recoilEditUser]);
   useEffect(() => {
     if (formUser.name === "" || formUser.email === "") {
       return console.log("空の値は登録できません");
     }
-    console.log("登録します");
+    if (recoilEditUser) {
+      console.log("編集します");
+      console.log("編集後の内容", formUser);
+      dbEdited(formUser);
+    } else {
+      console.log("新規登録します");
     dbRegistered(formUser);
+    }
   }, [formUser]);
 
   return (
@@ -77,6 +117,13 @@ export const UserForm = () => {
       <Center>
         <form onSubmit={getFormUser}>
           <TextInput
+          <TextInput
+            // className="invisible"
+            disabled
+            label="id"
+            placeholder="id"
+            {...form.getInputProps("id")}
+          />
             label="名前"
             placeholder="Name"
             {...form.getInputProps("name")}
