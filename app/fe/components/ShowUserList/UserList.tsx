@@ -40,6 +40,19 @@ export const UsersList = (props) => {
     const id = e.currentTarget.getAttribute("user_id");
     deleteUser(id);
   };
+
+  // useHookであるuseGetUserのgetUserByIdを受け取る
+  const getUserById = useGetUser(id);
+  const editClick = (e: React.MouseEvent<HTMLElement>) => {
+    const id = e.currentTarget.getAttribute("edit_user_id");
+    // 1 GETでuser_idからuserを取得
+    const user = getUserById(id);
+    // 2 取得したuserをformに反映
+    console.log("user", user);
+
+    // 3 値を編集したあとPUT
+  };
+
   const rows = props.data.map((item) => (
     <tr key={item.name}>
       <td>
@@ -68,7 +81,9 @@ export const UsersList = (props) => {
         </Text>
       </td>
       <td>
-        <button>編集</button>
+        <button onClick={editClick} edit_user_id={item.id}>
+          編集
+        </button>
       </td>
       <td>
         <button onClick={deleteClick} user_id={item.id}>
