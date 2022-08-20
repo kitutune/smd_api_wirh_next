@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useCallback, useEffect } from "react";
 
-export const usePostUser = (props) => {
+export const usePostUser = () => {
   // java側でPOSTメソッドを実装しているURL
   const BASEURL = "http://localhost:8080/api/users";
   // DBにformから受け取った値を登録（INSERT）するメソッド

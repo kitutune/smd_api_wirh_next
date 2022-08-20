@@ -50,14 +50,13 @@ public class UserController {
 
     @GetMapping("/users")
     public List<UserEntity> getAllUsers() {
-        // public String getAllUsers() {
+        System.out.println("全てのユーザーデータを取得");
         return userServiceImpl.getAllUsers();
-        // return "hello world";
     }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserForm> getUserById(@PathVariable("id") Integer id) {
-        System.out.println("削除しようとしてる");
+        System.out.println("idからユーザーデータを取得");
         UserForm user = null;
         user = userServiceImpl.getUserById(id);
         return ResponseEntity.ok(user);
@@ -66,9 +65,12 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteUserById(@PathVariable("id") Integer id) {
         boolean deleted = false;
+        System.out.println("IDを取得し削除");
+        System.out.println(id);
         deleted = userServiceImpl.deleteUser(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
+        System.out.println(response);
         return ResponseEntity.ok(response);
     }
     // @DeleteMapping("/user/{id}")
@@ -84,6 +86,9 @@ public class UserController {
     @PutMapping("/user/{id}")
     public ResponseEntity<UserForm> updateUser(@PathVariable("id") Integer id,
             @RequestBody UserForm user) {
+        System.out.println("IDからユーザーを取得して編集");
+        System.out.println(user);
+        System.out.println(user.getName());
         user = userServiceImpl.updateUser(id, user);
         return ResponseEntity.ok(user);
     }

@@ -10,7 +10,7 @@ export const Header = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="mt-10">
-        <h1>SampleTest</h1>
+        <h1>Header部分：SampleTest</h1>
       </div>
     </>
   );

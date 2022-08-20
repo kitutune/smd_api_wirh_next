@@ -1,7 +1,6 @@
 package com.smd.api.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -62,12 +61,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserForm updateUser(Integer id, UserForm uForm) {
+        System.out.println("サービスでユーザーを編集");
+        System.out.println(uForm);
         // updateUserの機能を実装
         UserEntity uEntity = uRepository.findById(id).get();
+        System.out.println("サービスでユーザーエンティティを取得");
+        System.out.println(uEntity);
+        System.out.println(uEntity.getName());
         uEntity.setName(uForm.getName());
         uEntity.setAge(uForm.getAge());
         uEntity.setEmail(uForm.getEmail());
         uEntity.setTodo(uForm.getTodo());
+        System.out.println("サービスでユーザーエンティティを書き換え");
+        System.out.println(uEntity.getName());
         return uForm;
     }
 

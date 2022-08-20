@@ -1,8 +1,7 @@
-import { Button, Center, Checkbox, Group, TextInput } from "@mantine/core";
+import { Button, Center, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { editUserState } from "atom/PUT/EditUser";
-import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { usePostUser } from "./ShowUserList/Post/PostUser";
 import { usePutUser } from "./ShowUserList/Put/PutUser";
@@ -10,7 +9,6 @@ import { usePutUser } from "./ShowUserList/Put/PutUser";
 export const UserForm = () => {
   const recoilEditUser = useRecoilValue(editUserState);
   console.log("使う側のRecol", recoilEditUser);
-  // console.log("使う側のRecol", recoilEditUser.name);
 
   const [formUser, setFormUser] = useState({
     id: "",
@@ -21,16 +19,13 @@ export const UserForm = () => {
     // termsOfService: false,
   });
   const dbEdited = usePutUser();
-  const dbRegistered = usePostUser(formUser);
-
-  // const BASEURL = "http://localhost:8080/api/users";
+  const dbRegistered = usePostUser();
 
   const form = useForm({
     initialValues: {
       id: "",
       name: "",
       age: "",
-      // password: "",
       todo: "",
       email: "",
       // termsOfService: false,
@@ -46,7 +41,7 @@ export const UserForm = () => {
           ? null
           : "年齢は数字で150以下で入力してください",
       todo: (todo_value) =>
-        todo_value.length < 1 ? "passwordは必須入力です" : null,
+        todo_value.length < 1 ? "todoは必須入力です" : null,
       email: (mail_value) =>
         mail_value.length === 0
           ? null
@@ -55,27 +50,13 @@ export const UserForm = () => {
           : "メールアドレス形式で入力してください",
     },
   });
+
   const getFormUser = form.onSubmit((values) => {
     console.log("values", values);
     setFormUser(values);
   });
 
-  // const dbRegistered = useCallback((formUser) => {
-  //   axios
-  //     .post(BASEURL, formUser, {
-  //       // デフォルト値がapplication/jsonなので記述必要なし
-  //       // headers: { "Content-Type": "application/json" },
-  //     })
-  //     .then((response) => {
-  //       if (response.status === 200) console.log("登録成功");
-
-  //       console.log(response.status);
-  //       console.log(response.data);
-  //     });
-  // }, []);
-
   const editUserToForm = () => {
-    form.setFieldValue("name", "testUser2");
     form.setValues({
       id: recoilEditUser.id,
       name: recoilEditUser.name,
@@ -90,14 +71,11 @@ export const UserForm = () => {
     console.log(!!recoilEditUser);
     if (!recoilEditUser) {
       console.log("中身が空");
-
       return;
     }
     editUserToForm();
-    // return () => {
-    //   second
-    // }
   }, [recoilEditUser]);
+
   useEffect(() => {
     if (formUser.name === "" || formUser.email === "") {
       return console.log("空の値は登録できません");
