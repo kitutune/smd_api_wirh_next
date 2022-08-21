@@ -18,6 +18,7 @@ export const UserForm = () => {
     email: "",
     // termsOfService: false,
   });
+
   const dbEdited = usePutUser();
   const dbRegistered = usePostUser();
 
@@ -69,11 +70,12 @@ export const UserForm = () => {
     console.log(recoilEditUser);
     console.log(!recoilEditUser);
     console.log(!!recoilEditUser);
-    if (!recoilEditUser) {
+    if (recoilEditUser.name === "") {
       console.log("中身が空");
       return;
     }
     editUserToForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recoilEditUser]);
 
   useEffect(() => {
@@ -88,8 +90,11 @@ export const UserForm = () => {
       console.log("新規登録します");
       dbRegistered(formUser);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formUser]);
-  const [value, setValue] = useState("validateを使うとvalueで値を表示できなくなる");
+  const [value, setValue] = useState(
+    "validateを使うとvalueで値を表示できなくなる"
+  );
   return (
     <div className="mt-20">
       <Center>

@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useCallback } from "react";
+import { User } from "types/user";
 
+// useHookであるusePutUser自体には引数は必要ない
 export const usePutUser = () => {
   // DBにformから受け取った値を登録（INSERT）するメソッド（PUTなので既に登録されているデータに上書きする）
-  const dbEdited = useCallback((formUser) => {
+  // dbEditedには引数が必要
+  const dbEdited = useCallback((formUser:User) => {
     console.log("editformUser", formUser);
 
     axios

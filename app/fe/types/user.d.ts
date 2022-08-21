@@ -1,8 +1,8 @@
 // まだ未使用
 export type User = {
-  id: number;
+  id?: string;
   name: string;
-  age: number;
-  email: string;
+  age?: string;
+  email?: string;
   todo: string;
 };
