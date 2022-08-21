@@ -1,14 +1,10 @@
-import { editUserState } from "atom/PUT/EditUser";
 import axios from "axios";
 import { useCallback } from "react";
-import { useSetRecoilState } from "recoil";
 
+// useHookであるusePutUser自体には引数は必要ない
 export const useGetUser = () => {
-  // 状態を入力する側のRecoil
-  const setRecoilEditUser = useSetRecoilState(editUserState);
-
   // userテーブルから取得
-  const getUserById = useCallback(async (id) => {
+  const getUserById = useCallback(async (id: string) => {
     const response = await axios
       // java側でDELETEメソッドを実装しているURL、リクエスト先
       .get(`http://localhost:8080/api/user/${id}`)
@@ -17,12 +13,12 @@ export const useGetUser = () => {
         console.log(
           `Error! code: ${error.response.status}, message: ${error.message}`
         );
-        // return error.response;
+        return error.response;
       })
       .then((res) => {
         console.log("res.data", res.data);
-        setRecoilEditUser(res.data);
-        return res.data;
+        // return res.data;
+        return res;
       });
     console.log("response", response);
     return response;
