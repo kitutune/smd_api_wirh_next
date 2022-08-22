@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "types/user";
-import { useGetUserList } from "./Get/GetUserList";
+import { useGetUserList } from "../../service/Get/useGetUserList";
 import { UsersList } from "./UserList";
 
 export const ShowUserList = () => {

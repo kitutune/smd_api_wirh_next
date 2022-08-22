@@ -1,7 +1,7 @@
 import { ShowUserList } from "components/ShowUserList/ShowUserList";
 import type { NextPage } from "next";
 import { RecoilRoot } from "recoil";
-import { UserForm } from "../components/form";
+import { UserForm } from "../components/UserForm";
 
 const Home: NextPage = () => {
   return (

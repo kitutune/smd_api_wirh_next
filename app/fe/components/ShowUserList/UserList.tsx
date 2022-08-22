@@ -3,11 +3,13 @@ import { editUserState } from "atom/PUT/EditUser";
 import { FC } from "react";
 import { useSetRecoilState } from "recoil";
 import { User } from "types/user";
-import { useDeleteUser } from "./Delete/DeleteUser";
-import { useGetUser } from "./Get/GetUser";
+import { useDeleteUser } from "../../service/Delete/useDeleteUser";
+import { useGetUser } from "../../service/Get/useGetUser";
+// import { useDeleteUser } from "./Delete/useDeleteUser";
+// import { useGetUser } from "./Get/useGetUserr
 
 type Props = {
-  data:User[];
+  data: User[];
   children?: React.ReactNode;
 };
 
@@ -18,7 +20,7 @@ export const UsersList: FC<Props> = (props) => {
   const deleteUser = useDeleteUser();
   // 削除ボタン
   const fetchDeleteUserId = (e: React.MouseEvent<HTMLElement>) => {
-    const id = e.currentTarget.getAttribute("delete_user_id");
+    const id = e.currentTarget.getAttribute("data-delete_user_id");
     // nullの可能性を排除
     if (!id) {
       return;
@@ -32,8 +34,10 @@ export const UsersList: FC<Props> = (props) => {
   // 編集ボタン
   const fetchEditUserId = async (e: React.MouseEvent<HTMLElement>) => {
     // ①押した変種ボタンからedit_user_idに格納されているidを取得
-    const id = e.currentTarget.getAttribute("edit_user_id") ;
-    if(!id){return}
+    const id = e.currentTarget.getAttribute("data-edit_user_id");
+    if (!id) {
+      return;
+    }
     // ② ①で取得したidからユーザーデータを取得する awaitがなければ③がユーザーデーターを取得する前に実行され失敗する
     const response = await getUserById(id);
     // ③ ②で取得したデータがちゃんと取れてきているかステータスが200になっているかで確認する(コンソールで見ると中に何が入っているかわかる)
@@ -76,13 +80,12 @@ export const UsersList: FC<Props> = (props) => {
         </Text>
       </td>
       <td>
-        <button onClick={fetchEditUserId} 
-        edit_user_id={item.id}>
+        <button onClick={fetchEditUserId} data-edit_user_id={item.id}>
           編集
         </button>
       </td>
       <td>
-        <button onClick={fetchDeleteUserId} delete_user_id={item.id}>
+        <button onClick={fetchDeleteUserId} data-delete_user_id={item.id}>
           削除
         </button>
       </td>
