@@ -95,9 +95,9 @@ export const UserForm = () => {
   const [value, setValue] = useState(
     "validateを使うとvalueで値を表示できなくなる"
   );
-  // const resetForm = () => {
-  //   form.reset();
-  // };
+  const resetForm = () => {
+    form.reset();
+  };
   return (
     <div className="mt-20">
       <Center>
@@ -156,9 +156,9 @@ export const UserForm = () => {
             <Button className="bg-black" type="submit">
               Submit
             </Button>
-            {/* <Button className="bg-black" onClick={resetForm}>
+            <Button className="bg-black" onClick={resetForm}>
               Reset
-            </Button> */}
+            </Button>
           </Group>
         </form>
       </Center>
