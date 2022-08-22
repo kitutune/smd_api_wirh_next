@@ -3,8 +3,8 @@ import { useForm } from "@mantine/form";
 import { editUserState } from "atom/PUT/EditUser";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { usePostUser } from "./ShowUserList/Post/PostUser";
-import { usePutUser } from "./ShowUserList/Put/PutUser";
+import { usePostUser } from "../service/Post/usePostUser";
+import { usePutUser } from "../service/Put/usePutUser";
 
 export const UserForm = () => {
   const recoilEditUser = useRecoilValue(editUserState);

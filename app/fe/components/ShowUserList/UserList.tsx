@@ -3,8 +3,10 @@ import { editUserState } from "atom/PUT/EditUser";
 import { FC } from "react";
 import { useSetRecoilState } from "recoil";
 import { User } from "types/user";
-import { useDeleteUser } from "./Delete/DeleteUser";
-import { useGetUser } from "./Get/GetUser";
+import { useDeleteUser } from "../../service/Delete/useDeleteUser";
+import { useGetUser } from "../../service/Get/useGetUser";
+// import { useDeleteUser } from "./Delete/useDeleteUser";
+// import { useGetUser } from "./Get/useGetUserr
 
 type Props = {
   data: User[];
