@@ -22,13 +22,5 @@ export const usePostUser = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   if (formUser.name === "" || formUser.email === "") {
-  //     return console.log("空の値は登録できません");
-  //   }
-  //   console.log("登録します");
-  //   dbRegistered(formUser);
-  // }, [formUser]);
-
   return dbRegistered;
 };
