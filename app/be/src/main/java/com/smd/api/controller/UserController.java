@@ -36,7 +36,7 @@ public class UserController {
     @Autowired
     private final UserServiceImpl userServiceImpl;
 
-    @PostMapping("/users")
+    @PostMapping("/regist/user")
     public UserForm saveUser(@RequestBody UserForm user) {
         System.out.println("入力あり");
         System.out.println(user);

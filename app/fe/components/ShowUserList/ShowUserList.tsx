@@ -1,11 +1,11 @@
 import React from "react";
-import { User } from "types/user";
+import { RegisteredUsers } from "types/user";
 import { useGetUserList } from "../../service/Get/useGetUserList";
 import { UsersList } from "./UserList";
 
 export const ShowUserList = () => {
   // useHookであるuseGetUserListのuserListを受け取る
-  const userList:User[] = useGetUserList();
+  const userList:RegisteredUsers[] = useGetUserList();
 
   return (
     <>
