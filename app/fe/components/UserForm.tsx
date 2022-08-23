@@ -8,12 +8,16 @@ import { usePostUser } from "../service/Post/usePostUser";
 import { usePutUser } from "../service/Put/usePutUser";
 
 export const UserForm = () => {
+  // useHook
   const dbEdited = usePutUser();
   const dbRegistered = usePostUser();
+  const form = useUserForm();
 
+  // Recoil
   const recoilEditUser = useRecoilValue(editUserState);
   console.log("使う側のRecol", recoilEditUser);
 
+  // UserFormでformの状態を管理するための変数
   const [formUser, setFormUser] = useState({
     id: "",
     name: "",
@@ -22,8 +26,6 @@ export const UserForm = () => {
     email: "",
     // termsOfService: false,
   });
-
-  const form = useUserForm();
 
   const getFormUser = form.onSubmit((values) => {
     console.log("values", values);
@@ -81,9 +83,6 @@ export const UserForm = () => {
   // const [value, setValue] = useState(
   //   "validateを使うとvalueで値を表示できなくなる"
   // );
-  const resetForm = () => {
-    form.reset();
-  };
   return (
     <div className="mt-20">
       <Center>
@@ -143,7 +142,8 @@ export const UserForm = () => {
             <Button className="bg-black" type="submit">
               Submit
             </Button>
-            <Button className="bg-black" onClick={resetForm}>
+            {/* formのresetはシンプルなコードなので直書き */}
+            <Button className="bg-black" onClick={() => form.reset()}>
               Reset
             </Button>
           </Group>
