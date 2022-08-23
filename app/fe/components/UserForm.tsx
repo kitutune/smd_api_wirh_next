@@ -57,7 +57,7 @@ export const UserForm = () => {
     setFormUser(values);
   });
 
-  const editUserToForm = () => {
+  const editUserToForm = (recoilEditUser: RegisteredUsers) => {
     form.setValues({
       id: recoilEditUser.id,
       name: recoilEditUser.name,

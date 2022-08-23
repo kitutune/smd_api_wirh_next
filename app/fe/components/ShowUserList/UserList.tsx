@@ -2,14 +2,14 @@ import { Table, Group, Text, ScrollArea } from "@mantine/core";
 import { editUserState } from "atom/PUT/EditUser";
 import { FC } from "react";
 import { useSetRecoilState } from "recoil";
-import { User } from "types/user";
+import { RegisteredUsers } from "types/user";
 import { useDeleteUser } from "../../service/Delete/useDeleteUser";
 import { useGetUser } from "../../service/Get/useGetUser";
 // import { useDeleteUser } from "./Delete/useDeleteUser";
 // import { useGetUser } from "./Get/useGetUserr
 
 type Props = {
-  data: User[];
+  data: RegisteredUsers[];
   children?: React.ReactNode;
 };
 
