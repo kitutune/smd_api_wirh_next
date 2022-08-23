@@ -1,12 +1,16 @@
 import { Button, Center, Group, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import { editUserState } from "atom/PUT/EditUser";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { useUserForm } from "service/Form/useUserForm";
+import { RegisteredUsers } from "types/user";
 import { usePostUser } from "../service/Post/usePostUser";
 import { usePutUser } from "../service/Put/usePutUser";
 
 export const UserForm = () => {
+  const dbEdited = usePutUser();
+  const dbRegistered = usePostUser();
+
   const recoilEditUser = useRecoilValue(editUserState);
   console.log("使う側のRecol", recoilEditUser);
 
@@ -19,38 +23,7 @@ export const UserForm = () => {
     // termsOfService: false,
   });
 
-  const dbEdited = usePutUser();
-  const dbRegistered = usePostUser();
-
-  const form = useForm({
-    initialValues: {
-      id: "",
-      name: "",
-      age: "",
-      todo: "",
-      email: "",
-      // termsOfService: false,
-    },
-
-    validate: {
-      name: (name_value) =>
-        name_value.length < 1 ? "名前は必須入力です" : null,
-      age: (age_value) =>
-        age_value.length == 0
-          ? null
-          : /(^\d?\d{1}$)|(^1[0-4]{1}\d{1}$)|(^150$)/.test(age_value)
-          ? null
-          : "年齢は数字で150以下で入力してください",
-      todo: (todo_value) =>
-        todo_value.length < 1 ? "todoは必須入力です" : null,
-      email: (mail_value) =>
-        mail_value.length === 0
-          ? null
-          : /^\S+@\S+$/.test(mail_value)
-          ? null
-          : "メールアドレス形式で入力してください",
-    },
-  });
+  const form = useUserForm();
 
   const getFormUser = form.onSubmit((values) => {
     console.log("values", values);
@@ -66,35 +39,48 @@ export const UserForm = () => {
       email: recoilEditUser.email,
     });
   };
+
+  // 編集データを補完するrecoilEditUserに値が取得された際に
+  // formに編集データをセットするかの分岐処理
   useEffect(() => {
+    // ログでどう分岐されるか見るよう // 普段はコメントアウト
     console.log(recoilEditUser);
     console.log(!recoilEditUser);
     console.log(!!recoilEditUser);
+    // ①必須項目である名前が空文字なら既に登録されているデータとして
+    // 存在しているのは異常なので何もせずに返す
     if (recoilEditUser.name === "") {
       console.log("中身が空");
       return;
     }
-    editUserToForm();
+    // ② ①以外の場合は編集データとして扱う
+    editUserToForm(recoilEditUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recoilEditUser]);
 
+  // formに値がセットされた際にどう処理するか分岐させる
   useEffect(() => {
+    // ①必須項目が空文字なら処理せず返す
     if (formUser.name === "" || formUser.email === "") {
       return console.log("空の値は登録できません");
     }
-    if (recoilEditUser) {
+    // ②編集データを補完するrecoilEditUserにデータが存在するなら編集データとして処理する
+    if (!(recoilEditUser.id === "")) {
       console.log("編集します");
       console.log("編集後の内容", formUser);
       dbEdited(formUser);
     } else {
+      // ③上記条件以外なら新規登録として扱う
       console.log("新規登録します");
       dbRegistered(formUser);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formUser]);
-  const [value, setValue] = useState(
-    "validateを使うとvalueで値を表示できなくなる"
-  );
+
+  // 記事用に置く 「バリデート入れるとvalueで値表示できない」
+  // const [value, setValue] = useState(
+  //   "validateを使うとvalueで値を表示できなくなる"
+  // );
   const resetForm = () => {
     form.reset();
   };
@@ -102,10 +88,11 @@ export const UserForm = () => {
     <div className="mt-20">
       <Center>
         <form onSubmit={getFormUser}>
-          <TextInput
+          {/* 記事用に置く 「バリデート入れるとvalueで値表示できない」*/}
+          {/* <TextInput
             value={value}
             onChange={(event) => setValue(event.currentTarget.value)}
-          />
+          /> */}
           <TextInput
             // className="invisible"
             disabled
