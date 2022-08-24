@@ -1,6 +1,6 @@
 import { Table, Group, Text, ScrollArea } from "@mantine/core";
 import { editUserState } from "atom/PUT/EditUser";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { useSetRecoilState } from "recoil";
 import { RegisteredUsers } from "types/user";
 import { useDeleteUser } from "../../service/Delete/useDeleteUser";
@@ -19,7 +19,7 @@ export const UsersList: FC<Props> = (props) => {
   // useHookであるuseDeleteUserのdeleteUserメソッドを呼び出す
   const deleteUser = useDeleteUser();
   // 削除ボタン
-  const fetchDeleteUserId = (e: React.MouseEvent<HTMLElement>) => {
+  const fetchDeleteUserId = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute("data-delete_user_id");
     // nullの可能性を排除
     if (!id) {
@@ -27,12 +27,12 @@ export const UsersList: FC<Props> = (props) => {
     }
     // 取得したidを渡す
     deleteUser(id);
-  };
+  },[])
 
   // useHookであるuseGetUserのgetUserByIdメソッドを呼び出す
   const getUserById = useGetUser();
   // 編集ボタン
-  const fetchEditUserId = async (e: React.MouseEvent<HTMLElement>) => {
+  const fetchEditUserId = useCallback(async (e: React.MouseEvent<HTMLElement>) => {
     // ①押した変種ボタンからedit_user_idに格納されているidを取得
     const id = e.currentTarget.getAttribute("data-edit_user_id");
     if (!id) {
@@ -51,7 +51,7 @@ export const UsersList: FC<Props> = (props) => {
         `データの取得に失敗しました：response.statusは${response.status}です`
       );
     }
-  };
+  },[]);
 
   const rows = props.data.map((item) => (
     <tr key={item.name}>
